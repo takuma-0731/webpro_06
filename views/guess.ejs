@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>数字一発当てゲーム</title>
+</head>
+<body>
+  <h1>数字一発当てゲーム</h1>
+  <form action="/guess" method="GET">
+    <label for="guess">予想した数字を入力してください (1-100):</label>
+    <input type="number" name="guess" id="guess" required min="1" max="100">
+    <button type="submit">送信</button>
+  </form>
+
+  <% if (message) { %>
+    <p><%= message %></p>
+    <p>正解の数字は: <%= correctNumber %></p>
+  <% } %>
+</body>
+</html>

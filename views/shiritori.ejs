@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>しりとりゲーム - 最後の文字が「る」</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      color: #333;
+    }
+    .error {
+      color: red;
+    }
+    ul {
+      padding: 0;
+      list-style-type: none;
+    }
+    li {
+      background: #f4f4f4;
+      margin: 5px 0;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    form {
+      margin-top: 20px;
+    }
+    input[type="text"] {
+      width: 80%;
+      padding: 8px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    button {
+      padding: 8px 16px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>しりとりゲーム - 最後の文字が「る」</h1>
+
+  <% if (error) { %>
+    <p class="error"><%= error %></p>
+  <% } %>
+
+  <% if (cpuWord) { %>
+    <p>CPUの単語: <strong><%= cpuWord %></strong></p>
+    <p><%= nextHint %></p>
+  <% } else { %>
+    <p>ゲームを開始するには単語を入力してください。</p>
+  <% } %>
+
+  <form action="/shiritori" method="GET">
+    <label for="word">あなたの単語:</label><br>
+    <input type="text" id="word" name="word" required><br>
+    <input type="hidden" name="lastWord" value="<%= cpuWord || '' %>">
+    <input type="hidden" name="history" value="<%= history || '' %>">
+    <button type="submit">送信</button>
+  </form>
+
+  <% if (history) { %>
+    <h2>これまでの履歴</h2>
+    <ul>
+      <% history.split(',').forEach(word => { %>
+        <li><%= word %></li>
+      <% }); %>
+    </ul>
+  <% } %>
+</body>
+</html>
